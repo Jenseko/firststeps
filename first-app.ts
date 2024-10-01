@@ -35,12 +35,12 @@ user = {
 }
 
 
-// type User = {
-//     name: string;
-//     age: number;
-//     isAdmin: boolean;
-//     id: string | number;
-// }
+type User = {
+    name: string;
+    age: number;
+    isAdmin: boolean;
+    id: string | number;
+}
 
 // let user: User;
 
@@ -166,3 +166,41 @@ function performAction(action: string | number, role: Role) {
         //...
     }
 }
+
+
+///////////////// Generic Types //////////////
+
+// Built-in generic type
+let roles: Array<Role>;
+
+roles=['admin', 'editor'];
+
+//           T = placeholder, type is unknown at the moment
+type DataStorage<T> = {
+    storage: T[];
+    add: (data: T) => void;   // void = something would happen in this function
+};
+
+const textStorage: DataStorage<string> = {
+    storage: [],
+    add(data) {
+        this.storage.push(data);
+    }
+}
+
+const userStorage: DataStorage<User> = {
+storage: [],
+add(user) {}
+}
+
+function merge<T, U>(a: T, b: U) {
+    return {
+        ...a,
+        ...b
+    };
+}
+
+const newUser = merge<{name: string}, {age: number}>(
+    {name: 'Laureus'},
+    {age: 56},
+);
