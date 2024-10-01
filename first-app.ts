@@ -108,6 +108,7 @@ creds = {
     email: 'test@example.com',
 }
 
+// Only possible with using interface
 class AuthCredentials implements Credentials {
     email: string;
     password: string;
@@ -116,4 +117,23 @@ class AuthCredentials implements Credentials {
 
 function login(credentials: Credentials) {}
 
-login(new AuthCredentials)
+login(new AuthCredentials())
+
+// Merging types
+
+type Admin = {
+    permissions: string[];
+}
+
+type AppUser = {
+    userName: string;
+}
+
+type AppAdmin = Admin & AppUser;
+
+let admin: AppAdmin;
+
+admin = {
+    permissions: ['login'],
+    userName: 'Finn',
+}
