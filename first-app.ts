@@ -120,20 +120,49 @@ function login(credentials: Credentials) {}
 login(new AuthCredentials())
 
 // Merging types
+// both of them is possible, but with different syntax
 
-type Admin = {
+// type Admin = {
+//     permissions: string[];
+// }
+
+// type AppUser = {
+//     userName: string;
+// }
+
+// type AppAdmin = Admin & AppUser;
+
+interface Admin {
     permissions: string[];
 }
 
-type AppUser = {
+interface AppUser {
     userName: string;
 }
 
-type AppAdmin = Admin & AppUser;
+interface AppAdmin extends Admin, AppUser{}
 
 let admin: AppAdmin;
 
 admin = {
     permissions: ['login'],
     userName: 'Finn',
+}
+
+////////////// Literal Types ///////////////
+
+// let role: 'admin' | 'user' | 'editor';
+
+type Role = 'admin' | 'user' | 'editor';
+let role: Role;
+
+role = 'admin';
+role = 'user';
+role = 'editor'; 
+// role = 'abc';
+
+function performAction(action: string | number, role: Role) {
+    if(role === 'admin' && typeof action === 'string'){
+        //...
+    }
 }
