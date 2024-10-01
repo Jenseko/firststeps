@@ -7,14 +7,12 @@ let userAge = 67;
 
 let isValid= true;
 
-// Base types = string, number, boolean
+// Base type (string, number, boolean) ---------
 
 
-// Union type
+// Union type --------------------------
 
-type StringOrNum = string | number
-
-let userID: StringOrNum = 'abc123';
+let userID: string | number = 'abc123';
 userID = 123;
 
 
@@ -22,14 +20,12 @@ userID = 123;
 
 // let user : {};
 
-type User = {
+let user: {
     name: string;
     age: number;
     isAdmin: boolean;
     id: string | number;
 }
-
-let user: User;
 
 user = {
     name: 'Rosa',
@@ -37,6 +33,23 @@ user = {
     isAdmin: true,
     id: 'abc123',
 }
+
+
+// type User = {
+//     name: string;
+//     age: number;
+//     isAdmin: boolean;
+//     id: string | number;
+// }
+
+// let user: User;
+
+// user = {
+//     name: 'Rosa',
+//     age: 24,
+//     isAdmin: true,
+//     id: 'abc123',
+// }
 
 //////////////// Array Types //////////////////////
 
@@ -74,3 +87,33 @@ function calculate(
 ) {
     calcFn(a, b);
 }
+
+// type StringOrNum = string | number
+// let userID: StringOrNum = 'abc123';
+// userID = 123;
+
+////////////// Interface /////////////////
+// - for defining object types you can use 'interface' & 'type'
+// !!! with 'interface' you cannot use union types !!!
+
+interface Credentials {
+    password: string;
+    email: string; 
+}
+
+let creds : Credentials;
+
+creds = {
+    password: 'abc',
+    email: 'test@example.com',
+}
+
+class AuthCredentials implements Credentials {
+    email: string;
+    password: string;
+    username: string;
+}
+
+function login(credentials: Credentials) {}
+
+login(new AuthCredentials)
